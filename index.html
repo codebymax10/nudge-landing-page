@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nudge — Get paid without the awkward follow-up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #111110;
+      --paper: #fafaf9;
+      --mid: #888884;
+      --border: #e5e5e3;
+      --soft-bg: #f0f0ee;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'DM Serif Display', serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(250,250,249,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 15.5px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: #444442;
+      text-decoration: none;
+      letter-spacing: -0.005em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--paper) !important;
+      padding: 7px 17px;
+      border-radius: 999px;
+      font-size: 13.5px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.82; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+      gap: 48px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding-top: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 999px;
+      padding: 6px 14px 6px 10px;
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .badge-dot {
+      width: 14px;
+      height: 14px;
+      background: var(--paper);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .badge-dot svg {
+      width: 8px;
+      height: 8px;
+    }
+
+    .hero-heading {
+      font-family: var(--sans);
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero-heading .serif-italic {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-sub {
+      font-size: 14.5px;
+      font-weight: 400;
+      color: #666663;
+      line-height: 1.6;
+      max-width: 300px;
+      margin-bottom: 32px;
+      letter-spacing: -0.005em;
+    }
+
+    .hero-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .hero-input {
+      flex: 1;
+      padding: 11px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+      letter-spacing: -0.005em;
+    }
+
+    .hero-input::placeholder { color: #aaa; }
+    .hero-input:focus { border-color: #bbb; }
+
+    .hero-btn {
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      border-radius: 10px;
+      padding: 11px 22px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s;
+    }
+
+    .hero-btn:hover { opacity: 0.82; }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: -0.005em;
+    }
+
+    .avatar-stack {
+      display: flex;
+    }
+
+    .avatar-stack .av {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--paper);
+      background: var(--soft-bg);
+      margin-left: -6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--mid);
+    }
+
+    .avatar-stack .av:first-child { margin-left: 0; }
+
+    .av-a { background: #ddd; }
+    .av-b { background: #ccc; }
+    .av-c { background: #bbb; }
+
+    .proof-text strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* RIGHT */
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      border-radius: 20px;
+      overflow: visible;
+    }
+
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 4/4.6;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--soft-bg);
+      position: relative;
+    }
+
+    .hero-img svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .img-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+      line-height: 1.7;
+      pointer-events: none;
+    }
+
+    /* Review card */
+    .review-card {
+      position: absolute;
+      bottom: -68px;
+      right: -50px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      width: 260px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 8px;
+    }
+
+    .star {
+      width: 14px;
+      height: 14px;
+      fill: var(--ink);
+    }
+
+    .star.empty { fill: #ddd; }
+
+    .review-text {
+      font-size: 12.5px;
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 12px;
+      letter-spacing: -0.005em;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .review-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--soft-bg);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+    }
+
+    .review-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .review-role {
+      font-size: 11.5px;
+      color: var(--mid);
+      letter-spacing: -0.005em;
+    }
+
+    .review-rating-inline {
+      font-size: 11px;
+      color: var(--mid);
+    }
+
+    /* ─── SHARED SECTION STYLES ─── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 14px 0;
+      background: var(--paper);
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker 28s linear infinite;
+      gap: 0;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 40px;
+      font-size: 13px;
+      color: var(--mid);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .ticker-item strong { color: var(--ink); font-weight: 500; }
+
+    .ticker-sep {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section {
+      padding: 120px 0 100px;
+    }
+
+    .how-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .how-heading {
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    .how-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .how-desc {
+      font-size: 14.5px;
+      color: #666663;
+      line-height: 1.65;
+      max-width: 340px;
+      letter-spacing: -0.005em;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--paper);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 0.2s;
+    }
+
+    .step:hover { background: #f5f5f3; }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+
+    .step-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--soft-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-icon-wrap svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .step-body {
+      font-size: 13.5px;
+      color: #666663;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    /* ─── FEATURES ─── */
+    .features-section {
+      padding: 40px 0 120px;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .features-heading {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .features-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .features-sub {
+      font-size: 14.5px;
+      color: #666663;
+      max-width: 380px;
+      margin: 0 auto;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feat-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      background: #fff;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feat-card:hover {
+      box-shadow: 0 6px 32px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .feat-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .feat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--soft-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feat-icon svg { width: 20px; height: 20px; }
+
+    .feat-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .feat-body {
+      font-size: 13.5px;
+      color: #666663;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-section {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 100px 0;
+    }
+
+    .testimonials-section .section-label { color: rgba(255,255,255,0.4); }
+
+    .t-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+
+    .t-heading {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .t-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .t-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      max-width: 280px;
+      text-align: right;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    .t-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .t-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .t-quote {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+
+    .t-quote::before { content: '\201C'; }
+    .t-quote::after  { content: '\201D'; }
+
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 18px;
+    }
+
+    .t-av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      flex-shrink: 0;
+    }
+
+    .t-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .t-role {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: -0.005em;
+    }
+
+    /* ─── PRICING ─── */
+    .pricing-section {
+      padding: 120px 0;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .pricing-heading {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .pricing-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .pricing-sub {
+      font-size: 14.5px;
+      color: #666663;
+      max-width: 360px;
+      margin: 0 auto;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .plan-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .plan-card.featured {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    .plan-card.featured .plan-name { color: rgba(255,255,255,0.5); }
+
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .plan-amount {
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .plan-period {
+      font-size: 13px;
+      color: var(--mid);
+      letter-spacing: -0.005em;
+    }
+
+    .plan-card.featured .plan-period { color: rgba(255,255,255,0.5); }
+
+    .plan-desc {
+      font-size: 13.5px;
+      color: #888;
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+      margin-top: 10px;
+    }
+
+    .plan-card.featured .plan-desc { color: rgba(255,255,255,0.55); }
+
+    .plan-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    .plan-card.featured .plan-divider { background: rgba(255,255,255,0.12); }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      letter-spacing: -0.005em;
+    }
+
+    .plan-features li .check {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .plan-btn:hover { background: var(--soft-bg); }
+
+    .plan-card.featured .plan-btn {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    .plan-card.featured .plan-btn:hover { opacity: 0.9; }
+
+    /* ─── FAQ ─── */
+    .faq-section {
+      padding: 0 0 120px;
+    }
+
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .faq-heading {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .faq-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .faq-left-desc {
+      font-size: 14px;
+      color: #666663;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+      margin-bottom: 28px;
+    }
+
+    .faq-contact {
+      font-size: 13.5px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 16px;
+    }
+
+    .faq-q-text {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-toggle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .faq-item.open .faq-toggle {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .faq-toggle svg { width: 10px; height: 10px; }
+
+    .faq-a {
+      font-size: 13.5px;
+      color: #666663;
+      line-height: 1.65;
+      letter-spacing: -0.005em;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding-top 0.3s ease;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 14px;
+    }
+
+    /* ─── FINAL CTA ─── */
+    .cta-section {
+      background: var(--ink);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .cta-heading {
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.06;
+      color: var(--paper);
+      margin-bottom: 20px;
+    }
+
+    .cta-heading .si { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    .cta-sub {
+      font-size: 14.5px;
+      color: rgba(255,255,255,0.5);
+      max-width: 360px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 13px 16px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--paper);
+      background: rgba(255,255,255,0.08);
+      outline: none;
+      letter-spacing: -0.005em;
+      transition: border-color 0.15s;
+    }
+
+    .cta-input::placeholder { color: rgba(255,255,255,0.3); }
+    .cta-input:focus { border-color: rgba(255,255,255,0.35); }
+
+    .cta-btn {
+      background: var(--paper);
+      color: var(--ink);
+      border: none;
+      border-radius: 10px;
+      padding: 13px 24px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s;
+    }
+
+    .cta-btn:hover { opacity: 0.88; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12.5px;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: -0.005em;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #bbb;
+      letter-spacing: -0.005em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 80px;
+        gap: 48px;
+      }
+      .hero-right { display: none; }
+      .hero-heading { font-size: 42px; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="13" cy="13" r="11" stroke="#111" stroke-width="1.5"/>
+        <circle cx="13" cy="13" r="4" stroke="#111" stroke-width="1.5"/>
+        <line x1="13" y1="2" x2="13" y2="9" stroke="#111" stroke-width="1.5"/>
+        <line x1="13" y1="17" x2="13" y2="24" stroke="#111" stroke-width="1.5"/>
+        <line x1="2" y1="13" x2="9" y2="13" stroke="#111" stroke-width="1.5"/>
+        <line x1="17" y1="13" x2="24" y2="13" stroke="#111" stroke-width="1.5"/>
+      </svg>
+      Nudge
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Why Nudge</a></li>
+      <li><a href="#">Who it's for</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">How it works</a></li>
+      <li><a href="#" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <span class="hero-badge">
+        <span class="badge-dot">
+          <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="1.5" width="7" height="5" rx="0.75" stroke="#111" stroke-width="0.9"/>
+            <path d="M0.5 2.5L4 4.75L7.5 2.5" stroke="#111" stroke-width="0.9"/>
+          </svg>
+        </span>
+        Built for freelancers — free during beta
+      </span>
+
+      <h1 class="hero-heading">
+        Invoice. Follow up.<br>
+        <span class="serif-italic">Get paid.</span> No<br>
+        awkward emails.
+      </h1>
+
+      <p class="hero-sub">
+        Stop chasing clients for money yourself.<br>
+        Nudge sends polite, timely reminders automatically — so you get paid without the discomfort.
+      </p>
+
+      <form class="hero-form" onsubmit="return false;">
+        <input class="hero-input" type="email" placeholder="Enter your email" />
+        <button class="hero-btn">Reserve My Spot</button>
+      </form>
+
+      <div class="social-proof">
+        <div class="avatar-stack">
+          <div class="av av-a">S</div>
+          <div class="av av-b">M</div>
+          <div class="av av-c">R</div>
+        </div>
+        <p class="proof-text"><strong>12 freelancers</strong> joined in the last 24 hours</p>
+      </div>
+    </div>
+
+    <!-- RIGHT — Invoice dashboard mockup -->
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <div class="hero-img" style="aspect-ratio:unset; background:#fff; border:1px solid var(--border); padding:0; overflow:hidden; border-radius:20px;">
+
+          <!-- Dashboard chrome -->
+          <div style="background:#fafaf9; border-bottom:1px solid var(--border); padding:14px 18px; display:flex; align-items:center; justify-content:space-between;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <svg width="16" height="16" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="11" stroke="#111" stroke-width="1.5"/><circle cx="13" cy="13" r="4" stroke="#111" stroke-width="1.5"/><line x1="13" y1="2" x2="13" y2="9" stroke="#111" stroke-width="1.5"/><line x1="13" y1="17" x2="13" y2="24" stroke="#111" stroke-width="1.5"/><line x1="2" y1="13" x2="9" y2="13" stroke="#111" stroke-width="1.5"/><line x1="17" y1="13" x2="24" y2="13" stroke="#111" stroke-width="1.5"/></svg>
+              <span style="font-size:13px; font-weight:600; letter-spacing:-0.01em;">Nudge</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;"></div>
+              <span style="font-size:11px; color:var(--mid);">All systems live</span>
+            </div>
+          </div>
+
+          <!-- Stats row -->
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border-bottom:1px solid var(--border);">
+            <div style="background:#fff; padding:14px 16px;">
+              <p style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Outstanding</p>
+              <p style="font-size:20px; font-weight:700; letter-spacing:-0.03em;">£6,400</p>
+            </div>
+            <div style="background:#fff; padding:14px 16px;">
+              <p style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Chasing</p>
+              <p style="font-size:20px; font-weight:700; letter-spacing:-0.03em;">4</p>
+            </div>
+            <div style="background:#fff; padding:14px 16px;">
+              <p style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Paid this month</p>
+              <p style="font-size:20px; font-weight:700; letter-spacing:-0.03em;">£3,200</p>
+            </div>
+          </div>
+
+          <!-- Table header -->
+          <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:10px 18px; background:#fafaf9; border-bottom:1px solid var(--border);">
+            <span style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid);">Client</span>
+            <span style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid);">Amount</span>
+            <span style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid);">Status</span>
+            <span style="font-size:10px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--mid);">Next nudge</span>
+          </div>
+
+          <!-- Invoice rows -->
+          <div style="display:flex; flex-direction:column;">
+
+            <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:13px 18px; border-bottom:1px solid var(--border); align-items:center; background:#fff;">
+              <div>
+                <p style="font-size:13px; font-weight:500; letter-spacing:-0.01em; margin-bottom:2px;">Acme Co.</p>
+                <p style="font-size:11px; color:var(--mid);">INV-1042 · Due Apr 20</p>
+              </div>
+              <p style="font-size:13px; font-weight:600; letter-spacing:-0.01em;">£1,200</p>
+              <span style="display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#ef4444;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></span> 6d overdue
+              </span>
+              <p style="font-size:11px; color:var(--mid);">Today, 9am</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:13px 18px; border-bottom:1px solid var(--border); align-items:center; background:#fff;">
+              <div>
+                <p style="font-size:13px; font-weight:500; letter-spacing:-0.01em; margin-bottom:2px;">Studio North</p>
+                <p style="font-size:11px; color:var(--mid);">INV-1039 · Due Apr 15</p>
+              </div>
+              <p style="font-size:13px; font-weight:600; letter-spacing:-0.01em;">£2,800</p>
+              <span style="display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#f97316;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#f97316;flex-shrink:0;"></span> 11d overdue
+              </span>
+              <p style="font-size:11px; color:var(--mid);">Tomorrow</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:13px 18px; border-bottom:1px solid var(--border); align-items:center; background:#fff;">
+              <div>
+                <p style="font-size:13px; font-weight:500; letter-spacing:-0.01em; margin-bottom:2px;">Bloom Agency</p>
+                <p style="font-size:11px; color:var(--mid);">INV-1041 · Due Apr 23</p>
+              </div>
+              <p style="font-size:13px; font-weight:600; letter-spacing:-0.01em;">£950</p>
+              <span style="display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#f59e0b;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#f59e0b;flex-shrink:0;"></span> 3d overdue
+              </span>
+              <p style="font-size:11px; color:var(--mid);">Apr 28</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:13px 18px; border-bottom:1px solid var(--border); align-items:center; background:#fff;">
+              <div>
+                <p style="font-size:13px; font-weight:500; letter-spacing:-0.01em; margin-bottom:2px;">Kova Studio</p>
+                <p style="font-size:11px; color:var(--mid);">INV-1040 · Due Apr 18</p>
+              </div>
+              <p style="font-size:13px; font-weight:600; letter-spacing:-0.01em;">£1,450</p>
+              <span style="display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#ef4444;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></span> 8d overdue
+              </span>
+              <p style="font-size:11px; color:var(--mid);">Apr 27</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 80px 90px 90px; gap:8px; padding:13px 18px; align-items:center; background:#fafaf9;">
+              <div>
+                <p style="font-size:13px; font-weight:500; letter-spacing:-0.01em; margin-bottom:2px; color:#aaa;">Parallel Labs</p>
+                <p style="font-size:11px; color:#ccc;">INV-1038 · Due Apr 30</p>
+              </div>
+              <p style="font-size:13px; font-weight:600; letter-spacing:-0.01em; color:#aaa;">£780</p>
+              <span style="display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#22c55e;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;"></span> Paid
+              </span>
+              <p style="font-size:11px; color:#ccc;">—</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Floating review card -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg class="star" viewBox="0 0 14 14"><path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.825l-3.09 1.685.59-3.44L2 4.635l3.455-.505L7 1z"/></svg>
+            <svg class="star" viewBox="0 0 14 14"><path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.825l-3.09 1.685.59-3.44L2 4.635l3.455-.505L7 1z"/></svg>
+            <svg class="star" viewBox="0 0 14 14"><path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.825l-3.09 1.685.59-3.44L2 4.635l3.455-.505L7 1z"/></svg>
+            <svg class="star" viewBox="0 0 14 14"><path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.825l-3.09 1.685.59-3.44L2 4.635l3.455-.505L7 1z"/></svg>
+            <svg class="star empty" viewBox="0 0 14 14"><path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.825l-3.09 1.685.59-3.44L2 4.635l3.455-.505L7 1z"/></svg>
+          </div>
+          <p class="review-text">
+            "I used to dread following up. Now my invoices just… get paid. It's like magic."
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">JK</div>
+            <div>
+              <div class="review-name">Jamie Kwan</div>
+              <div class="review-role">
+                <span class="review-rating-inline">5.0 ★</span> · Freelance Designer
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-track">
+      <span class="ticker-item"><strong>$50k+</strong> recovered in late payments <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>300+</strong> freelancers on the waitlist <span class="ticker-sep"></span></span>
+      <span class="ticker-item">Average invoice paid <strong>11 days faster</strong> <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>Zero awkward</strong> conversations <span class="ticker-sep"></span></span>
+      <span class="ticker-item">Works with <strong>any invoice tool</strong> <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>Free</strong> during beta <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>$50k+</strong> recovered in late payments <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>300+</strong> freelancers on the waitlist <span class="ticker-sep"></span></span>
+      <span class="ticker-item">Average invoice paid <strong>11 days faster</strong> <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>Zero awkward</strong> conversations <span class="ticker-sep"></span></span>
+      <span class="ticker-item">Works with <strong>any invoice tool</strong> <span class="ticker-sep"></span></span>
+      <span class="ticker-item"><strong>Free</strong> during beta <span class="ticker-sep"></span></span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="section-wrap">
+      <div class="how-header">
+        <div>
+          <p class="section-label">How it works</p>
+          <h2 class="how-heading">Three steps.<br><span class="si">That's genuinely it.</span></h2>
+        </div>
+        <p class="how-desc">Nudge sits quietly in the background. The moment an invoice goes unpaid past its due date, it steps in so you don't have to.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="5" width="18" height="13" rx="2" stroke="#111" stroke-width="1.5"/>
+              <path d="M2 9h18" stroke="#111" stroke-width="1.5"/>
+              <path d="M6 2v3M16 2v3" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="step-title">Connect your invoices</h3>
+            <p class="step-body">Connect your favorite tool — Stripe, FreshBooks, Wave, QuickBooks — or add manually.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="11" r="8" stroke="#111" stroke-width="1.5"/>
+              <path d="M11 7v4l3 2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="step-title">Set your reminder rules</h3>
+            <p class="step-body">Choose when and how often to follow up — 3 days late, 7 days, 14 days. Nudge handles the timing and the tone.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 11l5 5 9-9" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="step-title">Get paid, stress-free</h3>
+            <p class="step-body">Nudge sends polite, professional follow-ups on your behalf. Your client relationship stays warm. Your bank account fills up.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="section-wrap">
+      <div class="features-header">
+        <p class="section-label">Features</p>
+        <h2 class="features-heading">Everything you need.<br><span class="si">Nothing you don't.</span></h2>
+        <p class="features-sub">Built lean for freelancers who want to get paid and get back to work.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 5h14M3 10h10M3 15h7" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feat-text">
+            <h3 class="feat-title">Smart email sequences</h3>
+            <p class="feat-body">Pre-written, naturally-worded follow-ups that don't feel like a robot wrote them. Escalates in firmness only if needed.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="7" height="7" rx="1.5" stroke="#111" stroke-width="1.5"/>
+              <rect x="11" y="2" width="7" height="7" rx="1.5" stroke="#111" stroke-width="1.5"/>
+              <rect x="2" y="11" width="7" height="7" rx="1.5" stroke="#111" stroke-width="1.5"/>
+              <rect x="11" y="11" width="7" height="7" rx="1.5" stroke="#111" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="feat-text">
+            <h3 class="feat-title">Invoice dashboard</h3>
+            <p class="feat-body">A single view of every outstanding invoice — what's due, what's overdue, and what Nudge has already chased for you.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" stroke="#111" stroke-width="1.5"/>
+              <path d="M10 6v4l2.5 2.5" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feat-text">
+            <h3 class="feat-title">Custom reminder timing</h3>
+            <p class="feat-body">Set your own cadence. Some clients need a gentle nudge on day 3. Others need a firmer one on day 30. You decide the rules.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 8c0 5-7 9-7 9S3 13 3 8a7 7 0 0114 0z" stroke="#111" stroke-width="1.5"/>
+              <circle cx="10" cy="8" r="2.5" stroke="#111" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="feat-text">
+            <h3 class="feat-title">Client-aware tone</h3>
+            <p class="feat-body">Mark clients as regulars, new, or at-risk. Nudge adjusts the warmth and firmness of every message accordingly.</p>
+          </div>
+        </div>
+        <div class="feat-card wide">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 10l4-4 4 4 4-6 4 6" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feat-text">
+            <h3 class="feat-title">Payment tracking &amp; reporting</h3>
+            <p class="feat-body">See exactly how long clients take to pay, which reminder triggered payment, and your average collection time over the month — all in one clean report.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESCALATION SEQUENCE -->
+  <section style="padding: 0 0 120px;">
+    <div class="section-wrap">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+        <div>
+          <p class="section-label">The escalation</p>
+          <h2 style="font-size:40px; font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:16px;">
+            Starts gentle.<br><span style="font-family:var(--serif); font-style:italic; font-weight:400;">Gets firm if needed.</span>
+          </h2>
+          <p style="font-size:14.5px; color:#666663; line-height:1.65; letter-spacing:-0.005em;">Most invoices are paid after the first nudge. But if they're not, Nudge keeps going — automatically, and without you having to say a word.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:2px;">
+
+          <div style="padding:22px 0; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr; gap:20px; align-items:start;">
+            <div style="display:flex; align-items:center; gap:8px; padding-top:2px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;display:inline-block;"></span>
+              <span style="font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--mid);">Day 3</span>
+            </div>
+            <div>
+              <p style="font-size:15px;font-weight:600;letter-spacing:-0.02em;margin-bottom:5px;">Polite reminder</p>
+              <p style="font-size:13px;color:#666663;line-height:1.55;letter-spacing:-0.005em;">"Just a quick note — Invoice #1042 was due on the 20th. Totally understand if it slipped through. Happy to resend if helpful."</p>
+            </div>
+          </div>
+
+          <div style="padding:22px 0; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr; gap:20px; align-items:start;">
+            <div style="display:flex; align-items:center; gap:8px; padding-top:2px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#f59e0b;flex-shrink:0;display:inline-block;"></span>
+              <span style="font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--mid);">Day 7</span>
+            </div>
+            <div>
+              <p style="font-size:15px;font-weight:600;letter-spacing:-0.02em;margin-bottom:5px;">Firm follow-up</p>
+              <p style="font-size:13px;color:#666663;line-height:1.55;letter-spacing:-0.005em;">"Invoice #1042 is now 7 days overdue. Could you let me know when I can expect payment, or if anything is holding this up?"</p>
+            </div>
+          </div>
+
+          <div style="padding:22px 0; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr; gap:20px; align-items:start;">
+            <div style="display:flex; align-items:center; gap:8px; padding-top:2px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#f97316;flex-shrink:0;display:inline-block;"></span>
+              <span style="font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--mid);">Day 14</span>
+            </div>
+            <div>
+              <p style="font-size:15px;font-weight:600;letter-spacing:-0.02em;margin-bottom:5px;">Formal notice</p>
+              <p style="font-size:13px;color:#666663;line-height:1.55;letter-spacing:-0.005em;">"This is a formal notice that Invoice #1042 remains unpaid. I am requesting full payment within 7 days before considering further action."</p>
+            </div>
+          </div>
+
+          <div style="padding:22px 0; display:grid; grid-template-columns:80px 1fr; gap:20px; align-items:start;">
+            <div style="display:flex; align-items:center; gap:8px; padding-top:2px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;display:inline-block;"></span>
+              <span style="font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--mid);">Day 30</span>
+            </div>
+            <div>
+              <p style="font-size:15px;font-weight:600;letter-spacing:-0.02em;margin-bottom:5px;">Small claims template</p>
+              <p style="font-size:13px;color:#666663;line-height:1.55;letter-spacing:-0.005em;">Nudge generates a pre-filled letter of claim — court-ready, with your name, invoice details, and the amount owed. Download, sign, send.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="section-wrap">
+      <div class="t-header">
+        <div>
+          <p class="section-label">What people say</p>
+          <h2 class="t-heading">Freelancers who stopped<br><span class="si">chasing, started earning.</span></h2>
+        </div>
+        <p class="t-sub">From the waitlist — these are real experiences from freelancers we've spoken to.</p>
+      </div>
+      <div class="t-grid">
+        <div class="t-card">
+          <p class="t-quote">I invoiced a client in November. By January I'd sent four follow-ups myself. Nudge would have handled all of that in the first two weeks.</p>
+          <div class="t-author">
+            <div class="t-av">SR</div>
+            <div>
+              <div class="t-name">Sofia R.</div>
+              <div class="t-role">Brand designer, 6 years freelance</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-quote">The awkwardness of following up on money is genuinely one of the worst parts of freelancing. A tool that removes that entirely? Yes please.</p>
+          <div class="t-author">
+            <div class="t-av">TM</div>
+            <div>
+              <div class="t-name">Tom M.</div>
+              <div class="t-role">Full-stack developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-quote">I avoid conflict at all costs. Knowing Nudge sends reminders for me means I can focus on the work and not the admin dread.</p>
+          <div class="t-author">
+            <div class="t-av">AL</div>
+            <div>
+              <div class="t-name">Amara L.</div>
+              <div class="t-role">Copywriter &amp; content strategist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section">
+    <div class="section-wrap">
+      <div class="pricing-header">
+        <p class="section-label">Pricing</p>
+        <h2 class="pricing-heading">Simple, <span class="si">honest</span> pricing.</h2>
+        <p class="pricing-sub">One-time payment. Yours forever. Lock in early-bird rates before we launch.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- FREE -->
+        <div class="plan-card">
+          <div class="plan-top">
+            <p class="plan-name">Free</p>
+            <div class="plan-price">
+              <span class="plan-amount">$0</span>
+              <span class="plan-period">forever</span>
+            </div>
+            <p class="plan-desc">For freelancers just starting out. No credit card needed.</p>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Up to 3 active invoices
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              2 reminder sequences
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Email reminders only
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#bbb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span style="color:#bbb">Custom tone settings</span>
+            </li>
+          </ul>
+          <a href="#" class="plan-btn">Get started free</a>
+        </div>
+        <!-- PRO (featured) -->
+        <div class="plan-card featured">
+          <div class="plan-top">
+            <p class="plan-name">Pro</p>
+            <div class="plan-price">
+              <span class="plan-amount">$49</span>
+              <span class="plan-period">one-time</span>
+            </div>
+            <p class="plan-desc">For active freelancers who want full autopilot. Pay once, use forever.</p>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Unlimited invoices
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Unlimited sequences
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Custom tone &amp; voice
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Payment analytics
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Priority support
+            </li>
+          </ul>
+          <a href="#" class="plan-btn">Join the waitlist</a>
+        </div>
+        <!-- STUDIO -->
+        <div class="plan-card">
+          <div class="plan-top">
+            <p class="plan-name">Studio</p>
+            <div class="plan-price">
+              <span class="plan-amount">$99</span>
+              <span class="plan-period">one-time</span>
+            </div>
+            <p class="plan-desc">For small studios and agencies. One payment, lifetime access.</p>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Everything in Pro
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Up to 5 team members
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Client portal access
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-6.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              White-label emails
+            </li>
+          </ul>
+          <a href="#" class="plan-btn">Join the waitlist</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-wrap">
+      <div class="faq-inner">
+        <div class="faq-left">
+          <p class="section-label">FAQ</p>
+          <h2 class="faq-heading">Common<br><span class="si">questions.</span></h2>
+          <p class="faq-left-desc">Still have something on your mind? We're human — drop us a line.</p>
+          <span class="faq-contact">hello@usenudge.co →</span>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-q-text">Will my clients know it's automated?</span>
+              <span class="faq-toggle">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <p class="faq-a">No. Nudge sends emails from your own address using natural, personal language. Your clients will think you wrote it yourself — because it sounds exactly like a professional, considerate email from you.</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-q-text">What invoice tools does Nudge work with?</span>
+              <span class="faq-toggle">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <p class="faq-a">You can forward any invoice email to Nudge and it parses the details automatically. We're also building direct integrations with FreshBooks, Wave, and Notion — more coming soon.</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-q-text">Can I customise what the emails say?</span>
+              <span class="faq-toggle">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <p class="faq-a">Yes. On the Pro and Studio plans you can edit the tone, adjust specific wording, and even write fully custom templates. Nudge just fills in the client name, invoice amount, and due date.</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-q-text">What if a client pays before a reminder goes out?</span>
+              <span class="faq-toggle">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <p class="faq-a">Mark the invoice as paid and Nudge cancels all pending reminders instantly. You can also set Nudge to detect payment confirmations automatically if you forward payment receipts to the same inbox.</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span class="faq-q-text">Is it really free during beta?</span>
+              <span class="faq-toggle">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <p class="faq-a">Yes — full Pro features, free, for everyone on the waitlist during the beta period. When we launch publicly, beta users lock in a discounted rate for life.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="section-wrap">
+      <p class="cta-eyebrow">Ready to stop chasing?</p>
+      <h2 class="cta-heading">Your invoices deserve<br>to be <span class="si">paid on time.</span></h2>
+      <p class="cta-sub">Join 300+ freelancers who've already said goodbye to the follow-up email forever.</p>
+      <form class="cta-form" onsubmit="return false;">
+        <input class="cta-input" type="email" placeholder="Enter your email" />
+        <button class="cta-btn">Reserve My Spot</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="13" cy="13" r="11" stroke="#111" stroke-width="1.5"/>
+        <circle cx="13" cy="13" r="4" stroke="#111" stroke-width="1.5"/>
+        <line x1="13" y1="2" x2="13" y2="9" stroke="#111" stroke-width="1.5"/>
+        <line x1="13" y1="17" x2="13" y2="24" stroke="#111" stroke-width="1.5"/>
+        <line x1="2" y1="13" x2="9" y2="13" stroke="#111" stroke-width="1.5"/>
+        <line x1="17" y1="13" x2="24" y2="13" stroke="#111" stroke-width="1.5"/>
+      </svg>
+      Nudge
+    </a>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Twitter / X</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Nudge. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.faq-toggle svg path').forEach(p => p.setAttribute('stroke', '#111'));
+      if (!isOpen) {
+        item.classList.add('open');
+        item.querySelector('.faq-toggle svg path').setAttribute('stroke', 'white');
+      }
+    }
+  </script>
+
+</body>
+</html>
