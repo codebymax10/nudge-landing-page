@@ -10,6 +10,10 @@
   --serif: 'DM Serif Display', serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   height: 100%;
   background: var(--paper);
@@ -1146,7 +1150,8 @@ footer {
 
   /* Nav */
   nav { padding: 0 20px; }
-  .nav-links { display: none; }
+  .nav-links { gap: 16px; }
+  .nav-extra { display: none; }
 
   /* Section padding */
   .section-wrap { padding: 0 20px; }
