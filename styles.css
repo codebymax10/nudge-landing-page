@@ -20,6 +20,7 @@ html, body {
   color: var(--ink);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ─── NAV ─── */
@@ -929,14 +930,18 @@ nav {
 
 /* ─── FAQ ─── */
 .faq-section {
-  padding: 0 0 120px;
+  padding: 120px 0;
 }
 
 .faq-inner {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.faq-left {
+  text-align: center;
 }
 
 .faq-heading {
@@ -968,6 +973,8 @@ nav {
 }
 
 .faq-list {
+  width: 100%;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--border);
@@ -1152,37 +1159,89 @@ footer {
   nav { padding: 0 20px; }
   .nav-links { gap: 16px; }
   .nav-extra { display: none; }
+  .nav-how { display: none; }
 
   /* Section padding */
   .section-wrap { padding: 0 20px; }
 
   /* ── Hero ── */
   .hero {
-    grid-template-columns: 1fr;
-    padding: 100px 20px 60px;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 60px 20px 0;
+    gap: 0;
     text-align: center;
   }
-  .hero-left { align-items: center; }
-  .hero-heading { font-size: 40px; }
-  .hero-sub { max-width: 100%; }
-  .hero-form { max-width: 100%; }
-  .social-proof { justify-content: center; }
+  .hero-left {
+    min-height: calc(100vh - 60px);
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    min-width: 0;
+    width: 100%;
+  }
+  .hero-badge {
+    font-size: clamp(10px, 3vw, 12.5px);
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .hero-heading {
+    font-size: clamp(26px, 8vw, 36px);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+  }
+  .hero-heading br { display: none; }
+  .hero-sub {
+    max-width: 100%;
+    font-size: clamp(13px, 3.5vw, 14.5px);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  .hero-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-input { width: 100%; box-sizing: border-box; }
+  .hero-btn { width: 100%; text-align: center; box-sizing: border-box; }
+  .social-proof {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: clamp(11px, 3vw, 13px);
+  }
 
   /* Show the dashboard on mobile */
   .hero-right {
     display: flex;
-    padding: 0 0 80px;
+    padding: 20px 0 100px;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
   }
-  .hero-img-wrap { max-width: 100%; }
+  .hero-img-wrap { width: 100%; max-width: 100%; }
 
   /* Allow table to scroll horizontally */
-  .hero-img { overflow: visible !important; }
   .dash-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
   .dash-scroll > div { min-width: 380px; }
+
+  /* Dashboard chrome + stats scale down with viewport */
+  .dash-chrome { padding: clamp(8px, 2.5vw, 14px) clamp(10px, 3vw, 18px) !important; }
+  .dash-stat { padding: clamp(8px, 2.5vw, 14px) clamp(8px, 2.5vw, 16px) !important; }
+  .dash-stat-val { font-size: clamp(14px, 4.5vw, 20px) !important; }
+  .dash-stat-label { font-size: clamp(7px, 2vw, 10px) !important; }
+
+  /* Table rows scale with viewport */
+  .dash-scroll > div { min-width: 0; }
+  .dash-table-head,
+  .dash-row {
+    grid-template-columns: 1fr clamp(45px, 12vw, 80px) clamp(60px, 16vw, 90px) clamp(60px, 16vw, 90px) !important;
+    padding: clamp(8px, 2.5vw, 13px) clamp(10px, 3vw, 18px) !important;
+    gap: clamp(4px, 1.5vw, 8px) !important;
+  }
 
   /* Review card — tuck inside the wrap */
   .review-card {
@@ -1241,11 +1300,8 @@ footer {
   .pricing-grid { grid-template-columns: 1fr; }
 
   /* ── FAQ ── */
-  .faq-section { padding: 0 0 80px; }
-  .faq-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+  .faq-section { padding: 80px 0; }
+  .faq-inner { gap: 32px; }
   .faq-heading { font-size: 30px; }
 
   /* ── CTA ── */
